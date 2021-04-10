@@ -1,13 +1,24 @@
+require 'uri'
 require 'openssl'
 
 class User < ApplicationRecord
   ITERATIONS = 20_000
   DIGEST = OpenSSL::Digest::SHA256.new
+  VALID_USERNAME = /\A\w+\z/
 
   has_many :questions
 
   validates :email, :username, presence: true
   validates :email, :username, uniqueness: true
+
+  #Проверка электронной почты
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+
+  #Проверка длины имя пользователя
+  validates_length_of :username, :maximum => 40
+
+  #Проверка формата юзернейма
+  validates :username, format: { with: VALID_USERNAME }
 
   attr_accessor :password
 
