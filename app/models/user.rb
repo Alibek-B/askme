@@ -15,15 +15,15 @@ class User < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   #Проверка длины имя пользователя
-  validates_length_of :username, :maximum => 40
+  validates :username, length: { maximum: 40 }
 
   #Проверка формата юзернейма
   validates :username, format: { with: VALID_USERNAME }
 
   attr_accessor :password
 
-  validates_presence_of :password, on: :create
-  validates_confirmation_of :password
+  validates :password, on: :create, presence: true
+  validates :password, confirmation: true
 
   before_save :encrypt_password
 
