@@ -11,6 +11,8 @@ class User < ApplicationRecord
   validates :email, :username, presence: true
   validates :email, :username, uniqueness: true
 
+  before_validation :downcase_username
+
   #Проверка электронной почты
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 
@@ -26,6 +28,10 @@ class User < ApplicationRecord
   validates :password, confirmation: true
 
   before_save :encrypt_password
+
+  def downcase_username
+    self.username.downcase!
+  end
 
   def encrypt_password
     if password.present?
