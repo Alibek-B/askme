@@ -6,31 +6,29 @@ class User < ApplicationRecord
   DIGEST = OpenSSL::Digest::SHA256.new
   VALID_USERNAME = /\A\w+\z/
 
+  attr_accessor :password
+
   has_many :questions
+
+  before_validation :downcase_username, :downcase_email
+  before_save :encrypt_password
 
   validates :email, :username, presence: true
   validates :email, :username, uniqueness: true
-
-  before_validation :downcase_username
-
-  #Проверка электронной почты
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 
-  #Проверка длины имя пользователя
   validates :username, length: { maximum: 40 }
-
-  #Проверка формата юзернейма
   validates :username, format: { with: VALID_USERNAME }
-
-  attr_accessor :password
 
   validates :password, on: :create, presence: true
   validates :password, confirmation: true
 
-  before_save :encrypt_password
-
   def downcase_username
-    self.username.downcase!
+    username.downcase! if username.present?
+  end
+
+  def downcase_email
+    email.downcase! if email.present?
   end
 
   def encrypt_password
