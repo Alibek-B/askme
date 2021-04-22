@@ -23,6 +23,36 @@ class User < ApplicationRecord
   validates :password, on: :create, presence: true
   validates :password, confirmation: true
 
+  def self.hash_to_string(password_hash)
+    password_hash.unpack('H*')[0]
+  end
+
+
+  def self.authenticate(email, password)
+    # Сперва находим кандидата по email
+    user = find_by(email: email)
+
+    # Если пользователь не найден, возвращает nil
+    return nil unless user.present?
+
+    # Формируем хэш пароля из того, что передали в метод
+    hashed_password = User.hash_to_string(
+      OpenSSL::PKCS5.pbkdf2_hmac(
+        password, user.password_salt, ITERATIONS, DIGEST.length, DIGEST
+      )
+    )
+
+    # Обратите внимание: сравнивается password_hash, а оригинальный пароль так
+    # никогда и не сохраняется нигде. Если пароли совпали, возвращаем
+    # пользователя.
+    return user if user.password_hash == hashed_password
+
+    # Иначе, возвращаем nil
+    nil
+  end
+
+  private
+
   def downcase_username
     username.downcase! if username.present?
   end
@@ -51,32 +81,5 @@ class User < ApplicationRecord
 
       # Оба поля попадут в базу при сохранении (save).
     end
-  end
-
-  def self.hash_to_string(password_hash)
-    password_hash.unpack('H*')[0]
-  end
-
-  def self.authenticate(email, password)
-    # Сперва находим кандидата по email
-    user = find_by(email: email)
-
-    # Если пользователь не найден, возвращает nil
-    return nil unless user.present?
-
-    # Формируем хэш пароля из того, что передали в метод
-    hashed_password = User.hash_to_string(
-      OpenSSL::PKCS5.pbkdf2_hmac(
-        password, user.password_salt, ITERATIONS, DIGEST.length, DIGEST
-      )
-    )
-
-    # Обратите внимание: сравнивается password_hash, а оригинальный пароль так
-    # никогда и не сохраняется нигде. Если пароли совпали, возвращаем
-    # пользователя.
-    return user if user.password_hash == hashed_password
-
-    # Иначе, возвращаем nil
-    nil
   end
 end
