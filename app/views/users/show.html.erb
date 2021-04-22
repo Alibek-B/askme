@@ -25,6 +25,10 @@
   </div>
 </div>
 
+<div class='questions-amount'>
+  У вас <%= t(:question_numbers, count: @questions.count) %>
+</div>
+
 <%# Блок с формой для задавания пользователю вопроса %>
 <div class="user-question-form-div column-1-4 column-1-4-right" id='ask-form'>
   <div class="user-question-form buffer-both">

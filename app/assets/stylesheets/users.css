@@ -53,6 +53,14 @@
   background: #D9E6E5;
 }
 
+.questions-amount {
+  background: #D9E6E5;
+  color: #005a55;
+  margin-top: 7px;
+  padding: 10px;
+  text-align: center;
+}
+
 @media (max-width: 960px) {
   .user-question-form {
     margin-left: 0;

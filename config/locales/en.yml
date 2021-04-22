@@ -30,4 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  number_of_questions:
+    zero: '%{count} questions'
+    one: '%{count} question'
+    other: '%{count} questions'

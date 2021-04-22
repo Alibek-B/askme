@@ -1,0 +1,7 @@
+ru:
+  question_numbers:
+    zero: 'нет вопросов'
+    one: '%{count} вопрос'
+    few: '%{count} вопроса'
+    many: '%{count} вопросов'
+    other: '%{count} вопросы'

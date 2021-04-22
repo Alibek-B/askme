@@ -2,14 +2,14 @@ class UsersController < ApplicationController
   def index
     @users = [
       User.new(
-        id: 1, 
+        id: 1,
         name: 'Alibek',
         username: 'ibb',
       ),
 
       User.new(
-        id: 2, 
-        name: 'Al', 
+        id: 2,
+        name: 'Al',
         username: 'al',
       )
     ]
@@ -28,7 +28,8 @@ class UsersController < ApplicationController
     )
 
     @questions = [
-      Question.new(text: 'Как дела?', created_at: Date.parse('14.04.2021')),
+      Question.new(text: 'В чем смысл жизни?', created_at: Date.parse('14.04.2021')),
+      Question.new(text: 'В чем смысл жизни?', created_at: Date.parse('14.04.2021')),
       Question.new(text: 'В чем смысл жизни?', created_at: Date.parse('14.04.2021')),
     ]
 
