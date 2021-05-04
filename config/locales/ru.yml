@@ -5,3 +5,17 @@ ru:
     few: '%{count} вопроса'
     many: '%{count} вопросов'
     other: '%{count} вопросы'
+
+  answer_numbers:
+    zero: 'нет ответов'
+    one: '%{count} ответ'
+    few: '%{count} ответа'
+    many: '%{count} ответов'
+    other: '%{count} ответы'
+
+  unanswered_numbers:
+    zero: 'нет безответных'
+    one: '%{count} безответный'
+    few: '%{count} безответных'
+    many: '%{count} безответных'
+    other: '%{count} безответные'
