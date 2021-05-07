@@ -30,10 +30,10 @@ class QuestionsController < ApplicationController
 
   # DELETE /questions/1 or /questions/1.json
   def destroy
-    #user = @question.user
+    user = @question.user
     @question.destroy
 
-    redirect_to user_path(@question.user), notice: "Вопрос удален"
+    redirect_to user_path(user), notice: "Вопрос удален"
   end
 
   private
