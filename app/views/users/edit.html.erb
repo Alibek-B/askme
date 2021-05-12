@@ -58,6 +58,10 @@
       </div>
 
       <div class="form-action buffer-top">
+        <%= link_to 'Удалить аккаунт', @user, method: :delete %>
+      </div>
+
+      <div class="form-action buffer-top">
         <%= f.submit 'Сохранить', class: 'button button-dark button-small' %>
       </div>
     <% end %>
