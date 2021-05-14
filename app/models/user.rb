@@ -8,7 +8,8 @@ class User < ApplicationRecord
 
   attr_accessor :password
 
-  has_many :questions
+  has_many :questions, dependent: :destroy
+  has_many :asked_questions, class_name: 'Question', foreign_key: :author_id, dependent: :nullify
 
   before_validation :downcase_username, :downcase_email
   before_save :encrypt_password
