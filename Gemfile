@@ -26,6 +26,7 @@ gem 'uglifier'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+gem 'recaptcha', require: 'recaptcha/rails'
 gem 'jquery-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
