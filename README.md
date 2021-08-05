@@ -1,24 +1,42 @@
-# README
+# Askme
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Клон известного приложения ASKfm, написанный на rails 6.1.3.
 
-Things you may want to cover:
+## Демо
 
-* Ruby version
+https://ask-a-question.herokuapp.com
 
-* System dependencies
+## Установка и запуск
+Склонируйте репозиторий в папку: 
+```
+git clone git@github.com:Alibek-B/askme.git
+```
+Затем выполните следующие команды:
 
-* Configuration
+* Установка зависимостей
 
-* Database creation
+```
+bundle install
+```
 
-* Database initialization
+* Миграция БД
 
-* How to run the test suite
+```
+rails db:migrate
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+* Ключи для recaptcha
 
-* Deployment instructions
+  Создайте файл `.env` и занесите в него ключи
 
-* ...
+```
+RECAPTCHA_ASKME_PUBLIC_KEY = 'публичный ключ'
+RECAPTCHA_ASKME_PRIVATE_KEY = 'приватный ключ'
+```
+
+* Запуск приложения
+```
+rails s
+```
+
+В браузере введите адрес `http://127.0.0.1:3000`
